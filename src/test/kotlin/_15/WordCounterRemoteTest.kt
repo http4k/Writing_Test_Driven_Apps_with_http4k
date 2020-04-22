@@ -10,7 +10,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 
 class WordCounterRemoteTest : WordCounterContract {
-    private val server = WordCounterApp(OkHttp()).asServer(SunHttp(0))
+    private val server = WordCounterApp(FakeDictionary()).asServer(SunHttp(0))
     override val app by lazy { ClientFilters.SetBaseUriFrom(Uri.of("http://localhost:${server.port()}")).then(OkHttp()) }
 
     @BeforeEach
