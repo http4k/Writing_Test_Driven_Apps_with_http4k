@@ -6,8 +6,8 @@ Write it in http4k to dump it - tests reusable!
 
 ## 01. First endpoint "count words in sentence" + failing test
 WordCounterTest
-    code: endpoint POST /count - body is text
-    test: `can count words` in `the lazy lazy cat`
+    code: HttpHandler POST /count - body is text = TODO()
+    test: `can count words` in `the lazy lazy cat` 
         expect: using hamkrest - status OK and body = 4
     run: fails
      
@@ -27,11 +27,14 @@ WordCounterApp
     run: fails
     
 ## 05. Define filter. then implement call counter filter and test - app test still fails
-    code: endpoint GET /calls - return 0
+    code: introduce routes() block - bind /count to POST
+    run: passes
+    code: add endpoint GET /calls - return 0
     run: gets further but fails on second call
+
 CallCounterTest
-    test: `counts number of calls` calls through to stub handler twice and increments counter - fails
-        expect: counter to equal 2
+    test: `counts number of calls` calls through to stub handler and increments counter - fails
+        expect: counter to equal 1
 CallCounter
     code: function CallCounter() - returns empty filter
     run: filter test fails
@@ -47,19 +50,36 @@ CallCounter
     refactor: convert app to field
 WordCounterContract
     refactor: extract interface, leaving val abstract
+    run: passes
         
 ## 08. implement remote version of contract on dynamic port
 WordCounterRemoteTest
     test: extend WordCounterContract
         convert app to server and start on port 8080
         add before and after methods to start and stop serve
+        app by lazy and preset localhost and port with SetBaseUriFrom 
+        use OkHttp
+    run: passes
 
 ## 09. use random port to allow parallelisation of tests
-    test: convert test to use dynamic port
+    test: convert test to use dynamic port 0
+    run: passes
 
 ## 10. add analysing of sentence - test fails
+    test: `can analyse a sentence` POST to /analyze
+        input: "the lazy lazy cat"
+        expected: OK && {"breakdown":{"t":2,"h":1,"e":1," ":3,"l":2,"a":3,"z":2,"y":2,"c":1}} 
+    run: fails
 
 ## 11. implement analysing of sentence - lens! test passes
+    code: 
+        introduce Analysis, data class with Map<Char, Int>
+        create Analysis with emptyMap()
+        use lens to respond
+    run: fails
+    code: 
+    grouping: take body, group by first letter, map to size of list
+        
 
 ## 12. conversion of test to use approval testing lib
 

@@ -30,8 +30,8 @@ interface WordCounterContract {
     }
 
     @Test
-    fun `can analyse a sentence`() {
-        val expected = """{"breakdown":{"t":2,"h":1,"e":1," ":3,"l":2,"a":3,"z":2,"y":2,"c":1}}"""
-        assertThat(app(Request(POST, "/analyse").body("the lazy lazy cat")), hasStatus(OK).and(hasBody(expected)))
+    fun `can analyse an empty sentence`() {
+        val expected = """{"breakdown":{}}"""
+        assertThat(app(Request(POST, "/analyse").body("")), hasStatus(OK).and(hasBody(expected)))
     }
 }

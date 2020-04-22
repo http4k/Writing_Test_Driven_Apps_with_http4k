@@ -34,6 +34,11 @@ interface WordCounterContract {
     }
 
     @Test
+    fun `can analyse an empty sentence`(approver: Approver) {
+        approver.assertApproved(app(Request(POST, "/analyse").body("")))
+    }
+
+    @Test
     fun `can analyse a sentence`(approver: Approver) {
         approver.assertApproved(app(Request(POST, "/analyse").body("the lazy lazy cat")))
     }
