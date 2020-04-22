@@ -18,11 +18,9 @@ class WordCounterTest {
 
     @Test
     fun `can count words`() {
-        val app = makeApp()
+        val app: HttpHandler = { r: Request ->
+            Response(OK).body(r.bodyString().split(" ").size.toString())
+        }
         assertThat(app(Request(POST, "/count").body("the lazy lazy cat")), hasStatus(OK).and(hasBody("4")))
-    }
-
-    private fun makeApp(): HttpHandler = { r: Request ->
-        Response(OK).body(r.bodyString().split(" ").size.toString())
     }
 }

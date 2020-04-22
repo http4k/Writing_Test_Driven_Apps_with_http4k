@@ -60,3 +60,15 @@ jacocoTestReport {
         xml.enabled = true
     }
 }
+
+sourceSets {
+    test {
+        kotlin {
+            srcDirs 'src/test/kotlin'
+            srcDirs 'src/practice/kotlin'
+        }
+        resources {
+            srcDir 'src/docs'
+        }
+    }
+}
