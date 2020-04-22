@@ -2,7 +2,9 @@ TESTING HTTP4K presentation
 
 Write it in http4k to dump it - tests reusable!
 
-## 0. Define HttpHandler and Filter
+## -01. Set the Dictionary Server running
+
+## 00. Define HttpHandler and Filter
 
 ## 01. First endpoint "count words in sentence" + failing test
 WordCounterTest
@@ -71,7 +73,7 @@ WordCounterRemoteTest
         expected: OK && {"breakdown":{"t":2,"h":1,"e":1," ":3,"l":2,"a":3,"z":2,"y":2,"c":1}} 
     run: fails
 
-## 11. implement analysing of sentence - lens! test passes
+## 11. implement analysing of sentence - test passes
     code: 
         introduce Analysis, data class with Map<Char, Int>
         create Analysis with emptyMap()
@@ -79,15 +81,35 @@ WordCounterRemoteTest
     run: fails
     code: 
     grouping: take body, group by first letter, map to size of list
-        
 
 ## 12. conversion of test to use approval testing lib
-
+    code: extend JsonApprovalTest
+        introduce approver and convert tests to use it
+    run: fails
+    code: approve tests
+    run: passes
+            
 ## 13. implement Dictionary Test and Dictionary client
+RealDictionaryTest
+    test: `known word is valid` to test isValid() in client
+    code: create Dictionary(httpHandler).isValid(word)
+        uses "SetBaseUri" again to set localhost:10000
+    test: `unknown word is not valid` to test isValid() in client
+    run: passes
 
-## 14. extract dictionary contract, add fake dictionary and test contract implementation
+## 14. extract dictionary contract, add fake dictionary and test contract implementation.
+    refactor: extract DictionaryContract interface, leave http abstract
+FakeDictionaryTest
+    test: add FakeDictionary : HttpHandler
+    code: implement FakeDictionary
+        /{word} GET to Response(OK)
+    run: fails
+    code:
+        valid words "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
+        if path word in words then OK else NOT_FOUND
+    run: passes
 
-## 15. use the dictionary in the WordCounter, and also change the tests to only expect valid words
+## 15. use the dictionary in the WordCounter, also change the tests to only expect valid words
 
 ## 16. add Chaos Engine and a new test to confirm what our client does when this happens.
 
