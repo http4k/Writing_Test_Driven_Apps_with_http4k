@@ -128,8 +128,22 @@ FakeDictionaryTest
     run: pass
     
 ## 16. add Chaos Engine and a new test to confirm what our client does when this happens.
+FakeDictionaryTest 
+    test: add `when blows up return false` to fake implementation only
+        add call to FakeDictionary blowUpOnce(), followed by 2 tests - first is false, second is true
+    run: fails
+    code: FakeDictionary now contains a ChaosEngine
+        add to existing app
+        implement blowUpOnce to: chaosEngine.enable(ReturnStatus(I_M_A_TEAPOT).appliedWhen(Once()))
+    run: passes
 
 ## 17. add main method to convert fake into a real server and configure chaos within it. Demo with swagger...
+FakeDictionary
+    code: add main method, convert FakeDictionary to server running on 10000
+        configure to blow up once
+        start server
+    run: FakeDictionary
+    demo: https://www.http4k.org/openapi3/?url=http://localhost:10000/chaos
 
 ## 18. Define ServiceVirtualisation. Add WordCounterClient and Contract interface
 
