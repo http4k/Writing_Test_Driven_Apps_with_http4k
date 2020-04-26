@@ -104,20 +104,20 @@ FakeDictionaryTest
     code: implement FakeDictionary
         /{word} GET to Response(OK)
     run: fails
+FakeDictionary
     code:
         valid words "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
         if path word in words then OK else NOT_FOUND
     run: passes
-    code: implement FakeDictionary
-        /{word} GET to Response(OK)
-
 
 ## 15. use the dictionary in the WordCounter, also change the tests to only expect valid words
+WordCounterContract
     refactor: rename `can count words to `can count valid words`
         expect: using hamkrest - status OK and body = 3
     run: fails
     test: add FakeDictionary() to WordCounterApp constructor - is HttpHandler
     run: fails
+WordCounterApp
     code: wrap dictionaryHttp in Dictionary inside WordCounterApp
         introduce extension function Dictionary.validWordsFrom - split body by " " and map each word with isValid()
         use validWordsFrom in count
