@@ -36,7 +36,6 @@ fun WordCounterApp(dictionaryHttp: HttpHandler): HttpHandler {
     )
 }
 
-private fun Dictionary.validWordsFrom(r: Request) = r.bodyString().split(" ")
-    .filter { isValid(it) }
+private fun Dictionary.validWordsFrom(r: Request) = r.bodyString().split(" ").filter(this::isValid)
 
 data class Analysis(val breakdown: Map<Char, Int>)

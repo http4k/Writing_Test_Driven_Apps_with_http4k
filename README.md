@@ -86,7 +86,7 @@ WordCounterRemoteTest
     code: extend JsonApprovalTest
         introduce approver and convert tests to use it
     run: fails
-    code: approve tests
+    IDE: approve tests
     run: passes
             
 ## 13. implement Dictionary Test and Dictionary client
@@ -108,9 +108,25 @@ FakeDictionaryTest
         valid words "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
         if path word in words then OK else NOT_FOUND
     run: passes
+    code: implement FakeDictionary
+        /{word} GET to Response(OK)
+
 
 ## 15. use the dictionary in the WordCounter, also change the tests to only expect valid words
-
+    refactor: rename `can count words to `can count valid words`
+        expect: using hamkrest - status OK and body = 3
+    run: fails
+    test: add FakeDictionary() to WordCounterApp constructor - is HttpHandler
+    run: fails
+    code: wrap dictionaryHttp in Dictionary inside WordCounterApp
+        introduce extension function Dictionary.validWordsFrom - split body by " " and map each word with isValid()
+        use validWordsFrom in count
+    run: pass
+    code: use validWordsFrom in analyse
+    run: fails
+    IDE: approve tests
+    run: pass
+    
 ## 16. add Chaos Engine and a new test to confirm what our client does when this happens.
 
 ## 17. add main method to convert fake into a real server and configure chaos within it. Demo with swagger...
