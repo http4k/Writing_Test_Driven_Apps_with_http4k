@@ -7,7 +7,7 @@ Write it in http4k to dump it - tests reusable!
 ## 00. Define HttpHandler and Filter
 
 ## 01. First endpoint "count words in sentence" + failing test
-WordCounterTest
+SentenceAnalyserTest
     code: HttpHandler POST /count - body is text = TODO()
     test: `can count words` in `the lazy lazy cat` 
         expect: using hamkrest - status OK and body = 4
@@ -18,7 +18,7 @@ WordCounterTest
     run: passes
 
 ## 03. convert to a "Server as a Function"
-WordCounterApp
+SentenceAnalyserApp
     refactor: extract function to it's own file
     run: passes
     
@@ -50,13 +50,13 @@ CallCounter
 
 ## 07. extract common test interface for shared test
     refactor: convert app to field
-WordCounterContract
+SentenceAnalyserContract
     refactor: extract interface, leaving val abstract
     run: passes
         
-## 08. implement remote version of contract on dynamic port
-WordCounterRemoteTest
-    test: extend WordCounterContract
+## 08. implement remote version of contract on static port
+SentenceAnalyserRemoteTest
+    test: extend SentenceAnalyserContract
         convert app to server and start on port 8080
         add before and after methods to start and stop serve
         app by lazy and preset localhost and port with SetBaseUriFrom 
@@ -79,8 +79,8 @@ WordCounterRemoteTest
         create Analysis with emptyMap()
         use lens to respond
     run: fails
-    code: 
-    grouping: take body, group by first letter, map to size of list
+    code: grouping: take body, group by first letter, map to size of list
+    run: passes
 
 ## 12. conversion of test to use approval testing lib
     code: extend JsonApprovalTest
@@ -110,15 +110,15 @@ FakeDictionary
         if path word in words then OK else NOT_FOUND
     run: passes
 
-## 15. use the dictionary in the WordCounter, also change the tests to only expect valid words
-WordCounterContract
+## 15. use the dictionary in the SentenceAnalyser, also change the tests to only expect valid words
+SentenceAnalyserContract
     refactor: rename `can count words to `can count valid words`
         expect: using hamkrest - status OK and body = 3
     run: fails
-    test: add FakeDictionary() to WordCounterApp constructor - is HttpHandler
+    test: add FakeDictionary() to SentenceAnalyserApp constructor - is HttpHandler
     run: fails
-WordCounterApp
-    code: wrap dictionaryHttp in Dictionary inside WordCounterApp
+SentenceAnalyserApp
+    code: wrap dictionaryHttp in Dictionary inside SentenceAnalyserApp
         introduce extension function Dictionary.validWordsFrom - split body by " " and map each word with isValid()
         use validWordsFrom in count
     run: pass
@@ -145,7 +145,7 @@ FakeDictionary
     run: FakeDictionary
     demo: https://www.http4k.org/openapi3/?url=http://localhost:10000/chaos
 
-## 18. Define ServiceVirtualisation. Add WordCounterClient and Contract interface
+## 18. Define ServiceVirtualisation. Add SentenceAnalyserClient and Contract interface
 
 ## 19. add recording & replaying contract
 
