@@ -1,4 +1,4 @@
-package _12
+package _13_slides
 
 import com.natpryce.hamkrest.and
 import com.natpryce.hamkrest.assertion.assertThat
@@ -14,9 +14,6 @@ import org.http4k.testing.JsonApprovalTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
-/**
- * conversion of test to use approval testing lib
- */
 @ExtendWith(JsonApprovalTest::class)
 interface SentenceAnalyserContract {
     val app: HttpHandler

@@ -1,4 +1,4 @@
-package _12
+package _12_slides
 
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo

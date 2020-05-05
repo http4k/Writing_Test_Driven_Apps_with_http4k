@@ -1,15 +1,20 @@
-package _13
+package _13_slides
 
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.http4k.client.OkHttp
+import org.http4k.core.Uri
+import org.http4k.core.then
+import org.http4k.filter.ClientFilters
 import org.junit.jupiter.api.Test
 
 /**
  * Implement Dictionary Test and Dictionary client
+ * (needs /etc/hosts hack and running server)
  */
 class RealDictionaryTest {
-    private val http = OkHttp()
+    private val http =
+        ClientFilters.SetBaseUriFrom(Uri.of("http://dictionary.com:12345")).then(OkHttp())
 
     @Test
     fun `known word is valid`() {

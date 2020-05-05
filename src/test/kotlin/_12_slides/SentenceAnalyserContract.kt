@@ -1,4 +1,4 @@
-package _10
+package _12_slides
 
 import com.natpryce.hamkrest.and
 import com.natpryce.hamkrest.assertion.assertThat
@@ -9,11 +9,15 @@ import org.http4k.core.Request
 import org.http4k.core.Status.Companion.OK
 import org.http4k.hamkrest.hasBody
 import org.http4k.hamkrest.hasStatus
+import org.http4k.testing.Approver
+import org.http4k.testing.JsonApprovalTest
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
 /**
- * Add analysing of sentence - test fails
+ * conversion of test to use approval testing lib
  */
+@ExtendWith(JsonApprovalTest::class)
 interface SentenceAnalyserContract {
     val app: HttpHandler
 
@@ -30,8 +34,12 @@ interface SentenceAnalyserContract {
     }
 
     @Test
-    fun `can analyse an empty sentence`() {
-        val expected = """{"breakdown":{}}"""
-        assertThat(app(Request(POST, "/analyse").body("")), hasStatus(OK).and(hasBody(expected)))
+    fun `can analyse an empty sentence`(approver: Approver) {
+        approver.assertApproved(app(Request(POST, "/analyse").body("")))
+    }
+
+    @Test
+    fun `can analyse a sentence`(approver: Approver) {
+        approver.assertApproved(app(Request(POST, "/analyse").body("the lazy lazy cat")))
     }
 }

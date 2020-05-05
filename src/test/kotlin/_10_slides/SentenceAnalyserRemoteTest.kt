@@ -1,4 +1,4 @@
-package _12
+package _10_slides
 
 import org.http4k.client.OkHttp
 import org.http4k.core.Uri

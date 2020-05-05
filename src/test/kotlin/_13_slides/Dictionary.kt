@@ -1,4 +1,4 @@
-package _13
+package _13_slides
 
 import org.http4k.core.HttpHandler
 import org.http4k.core.Method.GET
@@ -8,10 +8,10 @@ import org.http4k.core.Uri
 import org.http4k.core.then
 import org.http4k.filter.ClientFilters.SetBaseUriFrom
 
-class Dictionary(http: HttpHandler) {
-    private val dictionary = SetBaseUriFrom(Uri.of("http://localhost:10000")).then(http)
+class Dictionary(private val httpClient: HttpHandler) {
+    private val dictionary = SetBaseUriFrom(Uri.of("http://localhost:10000")).then(httpClient)
 
-    fun isValid(word: String) : Boolean = when(dictionary(Request(GET, "/$word")).status) {
+    fun isValid(word: String) : Boolean = when(httpClient(Request(GET, "/$word")).status) {
         OK -> true
         else -> false
     }
