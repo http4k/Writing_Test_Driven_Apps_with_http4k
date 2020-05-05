@@ -1,4 +1,4 @@
-package _14
+package _14_slides
 
 import org.http4k.core.HttpHandler
 import org.http4k.core.Method.GET
