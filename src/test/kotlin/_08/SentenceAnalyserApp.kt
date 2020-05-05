@@ -9,6 +9,8 @@ import org.http4k.core.Status.Companion.OK
 import org.http4k.core.then
 import org.http4k.routing.bind
 import org.http4k.routing.routes
+import org.http4k.server.SunHttp
+import org.http4k.server.asServer
 import java.util.concurrent.atomic.AtomicInteger
 
 fun SentenceAnalyserApp(): HttpHandler {
@@ -22,4 +24,8 @@ fun SentenceAnalyserApp(): HttpHandler {
             Response(OK).body(counter.get().toString())
         }
     )
+}
+
+fun main() {
+    SentenceAnalyserApp().asServer(SunHttp(8000)).start()
 }

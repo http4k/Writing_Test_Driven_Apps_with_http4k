@@ -1,4 +1,4 @@
-package _05
+package _05_slides
 
 import org.http4k.core.HttpHandler
 

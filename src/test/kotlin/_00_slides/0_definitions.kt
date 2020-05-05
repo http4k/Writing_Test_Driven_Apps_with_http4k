@@ -1,4 +1,4 @@
-package _00
+package _00_slides
 
 import org.http4k.core.Request
 import org.http4k.core.Response

@@ -1,4 +1,4 @@
-package _05
+package _05_slides
 
 import com.natpryce.hamkrest.and
 import com.natpryce.hamkrest.assertion.assertThat
