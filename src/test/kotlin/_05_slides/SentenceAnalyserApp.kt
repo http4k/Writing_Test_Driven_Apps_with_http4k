@@ -22,5 +22,5 @@ fun SentenceAnalyserApp(): HttpHandler = routes(
 )
 
 fun main() {
-    _03.SentenceAnalyserApp().asServer(SunHttp(8000)).start()
+    SentenceAnalyserApp().asServer(SunHttp(8000)).start()
 }
