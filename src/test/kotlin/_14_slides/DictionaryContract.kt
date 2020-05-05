@@ -18,6 +18,6 @@ interface DictionaryContract {
 
     @Test
     fun `unknown word is not valid`() {
-        assertThat(Dictionary(http).isValid("foobar"), equalTo(false))
+        assertThat(Dictionary(http).isValid("cat"), equalTo(false))
     }
 }

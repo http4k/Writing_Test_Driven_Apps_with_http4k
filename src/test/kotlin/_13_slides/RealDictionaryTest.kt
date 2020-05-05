@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test
 /**
  * Implement Dictionary Test and Dictionary client
  * (needs /etc/hosts hack and running server)
+ *
+ * CAT is not a valid word (service run by dogs)
  */
 class RealDictionaryTest {
     private val http =
@@ -23,6 +25,6 @@ class RealDictionaryTest {
 
     @Test
     fun `unknown word is not valid`() {
-        assertThat(Dictionary(http).isValid("foobar"), equalTo(false))
+        assertThat(Dictionary(http).isValid("cat"), equalTo(false))
     }
 }
