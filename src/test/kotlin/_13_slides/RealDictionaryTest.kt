@@ -12,7 +12,8 @@ import org.junit.jupiter.api.Test
  * Implement Dictionary Test and Dictionary client
  * (needs /etc/hosts hack and running server)
  *
- * CAT is not a valid word (service run by dogs)
+ * CAT
+ * is not a valid word (service run by dogs)
  */
 class RealDictionaryTest {
     private val http =
