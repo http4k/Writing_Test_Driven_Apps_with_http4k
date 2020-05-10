@@ -1,6 +1,5 @@
 package _17
 
-import _15.FakeDictionary
 import org.http4k.client.OkHttp
 import org.http4k.core.Uri
 import org.http4k.core.then
