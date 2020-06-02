@@ -1,11 +1,14 @@
+import org.http4k.client.OkHttp
 import org.http4k.core.Body
 import org.http4k.core.HttpHandler
 import org.http4k.core.Method
 import org.http4k.core.Request
 import org.http4k.core.Response
 import org.http4k.core.Status
+import org.http4k.core.Uri
 import org.http4k.core.then
 import org.http4k.core.with
+import org.http4k.filter.ClientFilters
 import org.http4k.routing.bind
 import org.http4k.routing.routes
 import org.http4k.server.SunHttp
@@ -35,5 +38,6 @@ private fun Dictionary.validWordsFrom(request: Request) = request.bodyString().s
 data class Analysis(val breakdown: Map<Char, Int>)
 
 fun main() {
-    SentenceAnalyserApp(FakeDictionary()).asServer(SunHttp(8080)).start()
+    SentenceAnalyserApp(ClientFilters.SetBaseUriFrom(Uri.of("http://api.dictionary.com:10000")).then(OkHttp()))
+        .asServer(SunHttp(8080)).start()
 }
