@@ -5,7 +5,7 @@
 To simulate the 3rd party dictionary service, we need to run the `DictionaryService` in its own terminal:
 
 ```bash
-runThirdPartyDictionary
+./gradlew runThirdPartyDictionary
 ```
 
 We also need add a fake dns entry to `etc/hosts`:
