@@ -2,7 +2,7 @@
 
 ## Pre-requisites
 
-To simulate the 3rd party dictionary service, we need to run the `DictionaryService` and add its fake name to `etc/hosts`:
+To simulate the 3rd party dictionary service, we need to run the `DictionaryService` and a fake dns entry to `etc/hosts`:
 
 ```
 127.0.0.1	localhost api.dictionary.com
