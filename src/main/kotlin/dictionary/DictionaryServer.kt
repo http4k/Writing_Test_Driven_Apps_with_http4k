@@ -28,4 +28,5 @@ private val words = setOf("the", "quick", "brown", "fox", "jumped", "over", "the
 
 fun main() {
     DictionaryServer(10000).start()
+    println("3rd Party Dictionary started. Leave this terminal running while running other tests...")
 }

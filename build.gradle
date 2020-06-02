@@ -61,6 +61,11 @@ jacocoTestReport {
     }
 }
 
+task runThirdPartyDictionary(type: JavaExec){
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'dictionary.DictionaryServerKt'
+}
+
 sourceSets {
     test {
         kotlin {
