@@ -12,7 +12,7 @@ class CallCounterTest {
     @Test
     fun `counts number of calls`() {
         val count = AtomicInteger(0)
-        val app = CallCounter(count).then { request: Request -> Response(Status.OK) }
+        val app = CallCounter(count).then { Response(Status.OK) }
 
         app(Request(Method.GET, ""))
         app(Request(Method.GET, ""))
