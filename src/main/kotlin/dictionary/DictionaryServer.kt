@@ -14,7 +14,8 @@ import org.http4k.server.Http4kServer
 import org.http4k.server.SunHttp
 import org.http4k.server.asServer
 
-class DictionaryServer(port: Int) : Http4kServer by DebuggingFilters.PrintRequestAndResponse().then(routes).asServer(SunHttp(port))
+class DictionaryServer(port: Int) :
+    Http4kServer by DebuggingFilters.PrintRequestAndResponse().then(routes).asServer(SunHttp(port))
 
 private val routes = routes(
     "/{word}" bind GET to { r: Request ->

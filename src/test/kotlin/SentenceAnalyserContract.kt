@@ -1,6 +1,5 @@
 import com.natpryce.hamkrest.and
 import com.natpryce.hamkrest.assertion.assertThat
-import com.natpryce.hamkrest.has
 import org.http4k.core.HttpHandler
 import org.http4k.core.Method
 import org.http4k.core.Request

@@ -9,11 +9,11 @@ import org.http4k.core.Uri
 import org.http4k.core.then
 import org.http4k.core.with
 import org.http4k.filter.ClientFilters
+import org.http4k.format.Jackson.auto
 import org.http4k.routing.bind
 import org.http4k.routing.routes
 import org.http4k.server.SunHttp
 import org.http4k.server.asServer
-import org.http4k.format.Jackson.auto
 import java.util.concurrent.atomic.AtomicInteger
 
 fun SentenceAnalyserApp(dictionaryHttp: HttpHandler): HttpHandler {
